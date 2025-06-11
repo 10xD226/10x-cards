@@ -1,0 +1,16 @@
+{
+  "name": "10x-warmup",
+  "version": "0.0.1",
+  "description": "Warmup repository for 10xDevs.pl program.",
+  "main": "index.js",
+  "scripts": {
+    "test": "vitest"
+  },
+  "author": "Przeprogramowani",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "22.13.11",
+    "typescript": "5.8.2",
+    "vitest": "3.0.9"
+  }
+}
