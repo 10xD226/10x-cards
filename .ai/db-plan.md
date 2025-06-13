@@ -31,3 +31,4 @@
 ## 5. Additional Notes
 - Job ad text is not stored; API validates length 100–10 000 characters.
 - Only the `practiced` flag is updated after insertion; question content is immutable.
+- The `auth.users` table comes from **Supabase Auth** and handles all user accounts.
