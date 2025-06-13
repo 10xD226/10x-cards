@@ -10,12 +10,6 @@
 7. [Learn More](#learn-more)
 8. [License](#license)
 
-## Learn More
-
-- [Next.js Documentation](https://nextjs.org/docs) – deep-dive into framework features and API.
-- [Supabase Documentation](https://supabase.com/docs) – database, authentication, and REST API reference.
-- [OpenAI API Docs](https://platform.openai.com/docs) – model parameters, rate limits, and best practices.
-
 ## Project Description
 InterviewPrep AI is a lightweight web application that helps candidates prepare for technical interviews.
 Paste the full text of any job advertisement and the app will instantly generate **five language-matched interview questions** powered by OpenAI GPT-3.5-Turbo.  
@@ -90,6 +84,12 @@ Planned success metrics:
 3. Average question-generation time < 15 s
 
 Watch the project board for detailed progress and upcoming tasks.
+
+## Learn More
+
+- [Next.js Documentation](https://nextjs.org/docs) – deep-dive into framework features and API.
+- [Supabase Documentation](https://supabase.com/docs) – database, authentication, and REST API reference.
+- [OpenAI API Docs](https://platform.openai.com/docs) – model parameters, rate limits, and best practices.
 
 ## License
 Distributed under the **MIT License**. See [`LICENSE`](LICENSE) for more information. 
