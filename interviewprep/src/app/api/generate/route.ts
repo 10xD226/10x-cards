@@ -31,7 +31,12 @@ export async function POST(req: NextRequest) {
   const raw = completion.choices[0].message?.content ?? '';
   const questions = raw
     .split('\n')
-    .map(q => q.replace(/^[0-9.\\-\\s]+/, '').trim())
+    .map(q =>
+      q
+        // remove leading numbering like "1.", "2)" or "- "
+        .replace(/^\s*\d+[).\-]?\s*/, '')
+        .trim()
+    )
     .filter(Boolean)
     .slice(0, 5);
 
