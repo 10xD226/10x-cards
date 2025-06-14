@@ -100,6 +100,8 @@ export function JobPostingForm({ onSuccess }: JobPostingFormProps) {
             )}
             placeholder="Wklej tutaj ogłoszenie o pracę (minimum 100 znaków)..."
             disabled={isGenerating}
+            aria-describedby="char-count error-message"
+            aria-invalid={!!form.formState.errors.jobPosting}
           />
           {isGenerating && (
             <div className="absolute inset-0 bg-background/80 flex items-center justify-center rounded-md">
@@ -114,15 +116,24 @@ export function JobPostingForm({ onSuccess }: JobPostingFormProps) {
         <div className="flex justify-between items-center text-xs">
           <div>
             {form.formState.errors.jobPosting && (
-              <span className="text-red-500">
+              <span 
+                id="error-message" 
+                className="text-red-500"
+                role="alert"
+                aria-live="polite"
+              >
                 {form.formState.errors.jobPosting.message}
               </span>
             )}
           </div>
-          <span className={cn(
-            'font-mono',
-            isCharCountValid ? 'text-green-600' : 'text-red-500'
-          )}>
+          <span 
+            id="char-count"
+            className={cn(
+              'font-mono',
+              isCharCountValid ? 'text-green-600' : 'text-red-500'
+            )}
+            aria-label={`Liczba znaków: ${charCount} z maksymalnie 10000`}
+          >
             {charCount}/10000
           </span>
         </div>

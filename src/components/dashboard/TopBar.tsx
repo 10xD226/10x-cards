@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { User } from '@supabase/auth-helpers-nextjs'
 import { Avatar } from '../ui/Avatar'
 import { DropdownMenu } from '../ui/DropdownMenu'
+import { ThemeToggle } from '../ui/ThemeToggle'
 
 interface TopBarProps {
   user: User
@@ -16,6 +17,7 @@ export function TopBar({ user }: TopBarProps) {
         </Link>
         
         <div className="flex items-center space-x-4">
+          <ThemeToggle />
           <DropdownMenu
             trigger={
               <Avatar
