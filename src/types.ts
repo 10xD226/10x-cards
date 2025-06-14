@@ -50,11 +50,17 @@ export interface GenerateQuestionsCommand {
 }
 
 /**
- * Command model for PATCH /api/questions/{id}
+ * Path parameters for PATCH /api/questions/{id}
  */
-export interface UpdateQuestionPracticeStatusCommand {
+export interface UpdateQuestionPathParams {
   /** Question identifier (UUID) */
   id: string
+}
+
+/**
+ * Request body for PATCH /api/questions/{id}
+ */
+export interface UpdateQuestionPracticeStatusCommand {
   /** Desired practiced status */
   practiced: boolean
 }
