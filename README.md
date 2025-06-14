@@ -120,24 +120,4 @@ npm run lint
 
 ---
 
-## 🔒 Environment Variables
-
-```bash
-# Supabase Configuration
-NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url_here
-NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key_here
-
-# OpenRouter Configuration (optional - uses demo mode if not set)
-OPENROUTER_API_KEY=your_openrouter_api_key_here
-
-# Demo Mode (optional - defaults to false)
-NEXT_PUBLIC_DEMO_MODE=false
-
-# GitHub OAuth (for production)
-GITHUB_CLIENT_ID=your_github_oauth_app_client_id
-GITHUB_CLIENT_SECRET=your_github_oauth_app_client_secret
-```
-
----
-
 Built with ❤️ for efficient interview preparation. 

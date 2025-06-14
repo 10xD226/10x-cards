@@ -1,0 +1,528 @@
+{
+  "config": {
+    "configFile": "/Users/bartpx/Documents/10xD/playwright.config.ts",
+    "rootDir": "/Users/bartpx/Documents/10xD/tests/e2e",
+    "forbidOnly": false,
+    "fullyParallel": true,
+    "globalSetup": "/Users/bartpx/Documents/10xD/tests/global-setup.ts",
+    "globalTeardown": "/Users/bartpx/Documents/10xD/tests/global-teardown.ts",
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 4
+    },
+    "preserveOutput": "always",
+    "reporter": [
+      [
+        "html",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "test-results/results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "quiet": false,
+    "projects": [
+      {
+        "outputDir": "/Users/bartpx/Documents/10xD/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 4
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "/Users/bartpx/Documents/10xD/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 60000
+      }
+    ],
+    "shard": null,
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.53.0",
+    "workers": 4,
+    "webServer": {
+      "command": "npm run dev",
+      "url": "http://localhost:3000",
+      "reuseExistingServer": true,
+      "timeout": 120000
+    }
+  },
+  "suites": [
+    {
+      "title": "complete-interview-flow.spec.ts",
+      "file": "complete-interview-flow.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Complete Interview Flow (FR-007)",
+          "file": "complete-interview-flow.spec.ts",
+          "line": 16,
+          "column": 6,
+          "specs": [
+            {
+              "title": "should complete full interview preparation workflow",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 9107,
+                      "error": {
+                        "message": "Error: \u001b[31mTimed out 5000ms waiting for \u001b[39m\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mnot\u001b[2m.\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nLocator: locator('h1')\nExpected pattern: not \u001b[32m/InterviewPrep/\u001b[39m\nReceived string: \u001b[31m\"\u001b[7mInterviewPrep\u001b[27m\"\u001b[39m\nCall log:\n\u001b[2m  - Expect \"not toHaveText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('h1')\u001b[22m\n\u001b[2m    9 × locator resolved to <h1 class=\"text-4xl font-bold mb-4 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent\">InterviewPrep</h1>\u001b[22m\n\u001b[2m      - unexpected value \"InterviewPrep\"\u001b[22m\n",
+                        "stack": "Error: \u001b[31mTimed out 5000ms waiting for \u001b[39m\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mnot\u001b[2m.\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nLocator: locator('h1')\nExpected pattern: not \u001b[32m/InterviewPrep/\u001b[39m\nReceived string: \u001b[31m\"\u001b[7mInterviewPrep\u001b[27m\"\u001b[39m\nCall log:\n\u001b[2m  - Expect \"not toHaveText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('h1')\u001b[22m\n\u001b[2m    9 × locator resolved to <h1 class=\"text-4xl font-bold mb-4 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent\">InterviewPrep</h1>\u001b[22m\n\u001b[2m      - unexpected value \"InterviewPrep\"\u001b[22m\n\n    at /Users/bartpx/Documents/10xD/tests/e2e/complete-interview-flow.spec.ts:51:44\n    at /Users/bartpx/Documents/10xD/tests/e2e/complete-interview-flow.spec.ts:49:16",
+                        "location": {
+                          "file": "/Users/bartpx/Documents/10xD/tests/e2e/complete-interview-flow.spec.ts",
+                          "column": 44,
+                          "line": 51
+                        },
+                        "snippet": "\u001b[0m \u001b[90m 49 |\u001b[39m     \u001b[36mawait\u001b[39m test\u001b[33m.\u001b[39mstep(\u001b[32m'Verify user is authenticated'\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m () \u001b[33m=>\u001b[39m {\n \u001b[90m 50 |\u001b[39m       \u001b[90m// Should see dashboard content, not landing page\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 51 |\u001b[39m       \u001b[36mawait\u001b[39m expect(page\u001b[33m.\u001b[39mlocator(\u001b[32m'h1'\u001b[39m))\u001b[33m.\u001b[39mnot\u001b[33m.\u001b[39mtoHaveText(\u001b[35m/InterviewPrep/\u001b[39m\u001b[33m,\u001b[39m { timeout\u001b[33m:\u001b[39m \u001b[35m5000\u001b[39m })\n \u001b[90m    |\u001b[39m                                            \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 52 |\u001b[39m       \u001b[36mawait\u001b[39m expect(homePage\u001b[33m.\u001b[39mjobPostingTextarea)\u001b[33m.\u001b[39mtoBeVisible({ timeout\u001b[33m:\u001b[39m \u001b[35m5000\u001b[39m })\n \u001b[90m 53 |\u001b[39m       \u001b[36mawait\u001b[39m expect(homePage\u001b[33m.\u001b[39mgenerateButton)\u001b[33m.\u001b[39mtoBeVisible({ timeout\u001b[33m:\u001b[39m \u001b[35m5000\u001b[39m })\n \u001b[90m 54 |\u001b[39m     })\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/Users/bartpx/Documents/10xD/tests/e2e/complete-interview-flow.spec.ts",
+                            "column": 44,
+                            "line": 51
+                          },
+                          "message": "Error: \u001b[31mTimed out 5000ms waiting for \u001b[39m\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mnot\u001b[2m.\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nLocator: locator('h1')\nExpected pattern: not \u001b[32m/InterviewPrep/\u001b[39m\nReceived string: \u001b[31m\"\u001b[7mInterviewPrep\u001b[27m\"\u001b[39m\nCall log:\n\u001b[2m  - Expect \"not toHaveText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('h1')\u001b[22m\n\u001b[2m    9 × locator resolved to <h1 class=\"text-4xl font-bold mb-4 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent\">InterviewPrep</h1>\u001b[22m\n\u001b[2m      - unexpected value \"InterviewPrep\"\u001b[22m\n\n\n\u001b[0m \u001b[90m 49 |\u001b[39m     \u001b[36mawait\u001b[39m test\u001b[33m.\u001b[39mstep(\u001b[32m'Verify user is authenticated'\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m () \u001b[33m=>\u001b[39m {\n \u001b[90m 50 |\u001b[39m       \u001b[90m// Should see dashboard content, not landing page\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 51 |\u001b[39m       \u001b[36mawait\u001b[39m expect(page\u001b[33m.\u001b[39mlocator(\u001b[32m'h1'\u001b[39m))\u001b[33m.\u001b[39mnot\u001b[33m.\u001b[39mtoHaveText(\u001b[35m/InterviewPrep/\u001b[39m\u001b[33m,\u001b[39m { timeout\u001b[33m:\u001b[39m \u001b[35m5000\u001b[39m })\n \u001b[90m    |\u001b[39m                                            \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 52 |\u001b[39m       \u001b[36mawait\u001b[39m expect(homePage\u001b[33m.\u001b[39mjobPostingTextarea)\u001b[33m.\u001b[39mtoBeVisible({ timeout\u001b[33m:\u001b[39m \u001b[35m5000\u001b[39m })\n \u001b[90m 53 |\u001b[39m       \u001b[36mawait\u001b[39m expect(homePage\u001b[33m.\u001b[39mgenerateButton)\u001b[33m.\u001b[39mtoBeVisible({ timeout\u001b[33m:\u001b[39m \u001b[35m5000\u001b[39m })\n \u001b[90m 54 |\u001b[39m     })\u001b[0m\n\u001b[2m    at /Users/bartpx/Documents/10xD/tests/e2e/complete-interview-flow.spec.ts:51:44\u001b[22m\n\u001b[2m    at /Users/bartpx/Documents/10xD/tests/e2e/complete-interview-flow.spec.ts:49:16\u001b[22m"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "Verify user is authenticated",
+                          "duration": 5182,
+                          "error": {
+                            "message": "Error: \u001b[31mTimed out 5000ms waiting for \u001b[39m\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mnot\u001b[2m.\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nLocator: locator('h1')\nExpected pattern: not \u001b[32m/InterviewPrep/\u001b[39m\nReceived string: \u001b[31m\"\u001b[7mInterviewPrep\u001b[27m\"\u001b[39m\nCall log:\n\u001b[2m  - Expect \"not toHaveText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('h1')\u001b[22m\n\u001b[2m    9 × locator resolved to <h1 class=\"text-4xl font-bold mb-4 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent\">InterviewPrep</h1>\u001b[22m\n\u001b[2m      - unexpected value \"InterviewPrep\"\u001b[22m\n",
+                            "stack": "Error: \u001b[31mTimed out 5000ms waiting for \u001b[39m\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mnot\u001b[2m.\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nLocator: locator('h1')\nExpected pattern: not \u001b[32m/InterviewPrep/\u001b[39m\nReceived string: \u001b[31m\"\u001b[7mInterviewPrep\u001b[27m\"\u001b[39m\nCall log:\n\u001b[2m  - Expect \"not toHaveText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('h1')\u001b[22m\n\u001b[2m    9 × locator resolved to <h1 class=\"text-4xl font-bold mb-4 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent\">InterviewPrep</h1>\u001b[22m\n\u001b[2m      - unexpected value \"InterviewPrep\"\u001b[22m\n\n    at /Users/bartpx/Documents/10xD/tests/e2e/complete-interview-flow.spec.ts:51:44\n    at /Users/bartpx/Documents/10xD/tests/e2e/complete-interview-flow.spec.ts:49:16",
+                            "location": {
+                              "file": "/Users/bartpx/Documents/10xD/tests/e2e/complete-interview-flow.spec.ts",
+                              "column": 44,
+                              "line": 51
+                            },
+                            "snippet": "\u001b[0m \u001b[90m 49 |\u001b[39m     \u001b[36mawait\u001b[39m test\u001b[33m.\u001b[39mstep(\u001b[32m'Verify user is authenticated'\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m () \u001b[33m=>\u001b[39m {\n \u001b[90m 50 |\u001b[39m       \u001b[90m// Should see dashboard content, not landing page\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 51 |\u001b[39m       \u001b[36mawait\u001b[39m expect(page\u001b[33m.\u001b[39mlocator(\u001b[32m'h1'\u001b[39m))\u001b[33m.\u001b[39mnot\u001b[33m.\u001b[39mtoHaveText(\u001b[35m/InterviewPrep/\u001b[39m\u001b[33m,\u001b[39m { timeout\u001b[33m:\u001b[39m \u001b[35m5000\u001b[39m })\n \u001b[90m    |\u001b[39m                                            \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 52 |\u001b[39m       \u001b[36mawait\u001b[39m expect(homePage\u001b[33m.\u001b[39mjobPostingTextarea)\u001b[33m.\u001b[39mtoBeVisible({ timeout\u001b[33m:\u001b[39m \u001b[35m5000\u001b[39m })\n \u001b[90m 53 |\u001b[39m       \u001b[36mawait\u001b[39m expect(homePage\u001b[33m.\u001b[39mgenerateButton)\u001b[33m.\u001b[39mtoBeVisible({ timeout\u001b[33m:\u001b[39m \u001b[35m5000\u001b[39m })\n \u001b[90m 54 |\u001b[39m     })\u001b[0m"
+                          }
+                        }
+                      ],
+                      "startTime": "2025-06-14T18:54:26.178Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/bartpx/Documents/10xD/test-results/complete-interview-flow-Co-6dc59-erview-preparation-workflow-chromium/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/Users/bartpx/Documents/10xD/test-results/complete-interview-flow-Co-6dc59-erview-preparation-workflow-chromium/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/Users/bartpx/Documents/10xD/test-results/complete-interview-flow-Co-6dc59-erview-preparation-workflow-chromium/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/Users/bartpx/Documents/10xD/tests/e2e/complete-interview-flow.spec.ts",
+                        "column": 44,
+                        "line": 51
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "77c03b90a8853d1ac806-bf213ebed44eac9fea11",
+              "file": "complete-interview-flow.spec.ts",
+              "line": 44,
+              "column": 7
+            },
+            {
+              "title": "should validate job posting character count",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
+                      "status": "failed",
+                      "duration": 38785,
+                      "error": {
+                        "message": "Error: locator.fill: Target page, context or browser has been closed\nCall log:\n\u001b[2m  - waiting for getByRole('textbox', { name: /ogłoszenie o pracę/i })\u001b[22m\n",
+                        "stack": "Error: locator.fill: Target page, context or browser has been closed\nCall log:\n\u001b[2m  - waiting for getByRole('textbox', { name: /ogłoszenie o pracę/i })\u001b[22m\n\n    at /Users/bartpx/Documents/10xD/tests/e2e/complete-interview-flow.spec.ts:113:41\n    at /Users/bartpx/Documents/10xD/tests/e2e/complete-interview-flow.spec.ts:110:16",
+                        "location": {
+                          "file": "/Users/bartpx/Documents/10xD/tests/e2e/complete-interview-flow.spec.ts",
+                          "column": 41,
+                          "line": 113
+                        },
+                        "snippet": "\u001b[0m \u001b[90m 111 |\u001b[39m       \u001b[90m// Test with text under 100 characters\u001b[39m\n \u001b[90m 112 |\u001b[39m       \u001b[36mconst\u001b[39m shortText \u001b[33m=\u001b[39m \u001b[32m'This is too short text for job posting'\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 113 |\u001b[39m       \u001b[36mawait\u001b[39m homePage\u001b[33m.\u001b[39mjobPostingTextarea\u001b[33m.\u001b[39mfill(shortText)\n \u001b[90m     |\u001b[39m                                         \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 114 |\u001b[39m       \n \u001b[90m 115 |\u001b[39m       \u001b[90m// Button should be disabled\u001b[39m\n \u001b[90m 116 |\u001b[39m       \u001b[36mawait\u001b[39m expect(homePage\u001b[33m.\u001b[39mgenerateButton)\u001b[33m.\u001b[39mtoBeDisabled()\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/Users/bartpx/Documents/10xD/tests/e2e/complete-interview-flow.spec.ts",
+                            "column": 41,
+                            "line": 113
+                          },
+                          "message": "Error: locator.fill: Target page, context or browser has been closed\nCall log:\n\u001b[2m  - waiting for getByRole('textbox', { name: /ogłoszenie o pracę/i })\u001b[22m\n\n\n\u001b[0m \u001b[90m 111 |\u001b[39m       \u001b[90m// Test with text under 100 characters\u001b[39m\n \u001b[90m 112 |\u001b[39m       \u001b[36mconst\u001b[39m shortText \u001b[33m=\u001b[39m \u001b[32m'This is too short text for job posting'\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 113 |\u001b[39m       \u001b[36mawait\u001b[39m homePage\u001b[33m.\u001b[39mjobPostingTextarea\u001b[33m.\u001b[39mfill(shortText)\n \u001b[90m     |\u001b[39m                                         \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 114 |\u001b[39m       \n \u001b[90m 115 |\u001b[39m       \u001b[90m// Button should be disabled\u001b[39m\n \u001b[90m 116 |\u001b[39m       \u001b[36mawait\u001b[39m expect(homePage\u001b[33m.\u001b[39mgenerateButton)\u001b[33m.\u001b[39mtoBeDisabled()\u001b[0m\n\u001b[2m    at /Users/bartpx/Documents/10xD/tests/e2e/complete-interview-flow.spec.ts:113:41\u001b[22m\n\u001b[2m    at /Users/bartpx/Documents/10xD/tests/e2e/complete-interview-flow.spec.ts:110:16\u001b[22m"
+                        },
+                        {
+                          "location": {
+                            "file": "/Users/bartpx/Documents/10xD/tests/helpers/api-mocks.ts",
+                            "column": 21,
+                            "line": 137
+                          },
+                          "message": "Error: page.unroute: Target page, context or browser has been closed\n\n\u001b[90m   at \u001b[39m../helpers/api-mocks.ts:137\n\n\u001b[0m \u001b[90m 135 |\u001b[39m \u001b[90m   */\u001b[39m\n \u001b[90m 136 |\u001b[39m   \u001b[36masync\u001b[39m clearAllMocks() {\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 137 |\u001b[39m     \u001b[36mawait\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mpage\u001b[33m.\u001b[39munroute(\u001b[32m'/api/questions/generate'\u001b[39m)\n \u001b[90m     |\u001b[39m                     \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 138 |\u001b[39m     \u001b[36mawait\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mpage\u001b[33m.\u001b[39munroute(\u001b[32m'/api/questions/*'\u001b[39m)\n \u001b[90m 139 |\u001b[39m     \u001b[36mawait\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mpage\u001b[33m.\u001b[39munroute(\u001b[32m'/api/questions'\u001b[39m)\n \u001b[90m 140 |\u001b[39m   }\u001b[0m\n\u001b[2m    at ApiMocks.clearAllMocks (/Users/bartpx/Documents/10xD/tests/helpers/api-mocks.ts:137:21)\u001b[22m\n\u001b[2m    at /Users/bartpx/Documents/10xD/tests/e2e/complete-interview-flow.spec.ts:37:20\u001b[22m"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "Verify minimum character requirement",
+                          "duration": 34793,
+                          "error": {
+                            "message": "Error: locator.fill: Target page, context or browser has been closed\nCall log:\n\u001b[2m  - waiting for getByRole('textbox', { name: /ogłoszenie o pracę/i })\u001b[22m\n",
+                            "stack": "Error: locator.fill: Target page, context or browser has been closed\nCall log:\n\u001b[2m  - waiting for getByRole('textbox', { name: /ogłoszenie o pracę/i })\u001b[22m\n\n    at /Users/bartpx/Documents/10xD/tests/e2e/complete-interview-flow.spec.ts:113:41\n    at /Users/bartpx/Documents/10xD/tests/e2e/complete-interview-flow.spec.ts:110:16",
+                            "location": {
+                              "file": "/Users/bartpx/Documents/10xD/tests/e2e/complete-interview-flow.spec.ts",
+                              "column": 41,
+                              "line": 113
+                            },
+                            "snippet": "\u001b[0m \u001b[90m 111 |\u001b[39m       \u001b[90m// Test with text under 100 characters\u001b[39m\n \u001b[90m 112 |\u001b[39m       \u001b[36mconst\u001b[39m shortText \u001b[33m=\u001b[39m \u001b[32m'This is too short text for job posting'\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 113 |\u001b[39m       \u001b[36mawait\u001b[39m homePage\u001b[33m.\u001b[39mjobPostingTextarea\u001b[33m.\u001b[39mfill(shortText)\n \u001b[90m     |\u001b[39m                                         \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 114 |\u001b[39m       \n \u001b[90m 115 |\u001b[39m       \u001b[90m// Button should be disabled\u001b[39m\n \u001b[90m 116 |\u001b[39m       \u001b[36mawait\u001b[39m expect(homePage\u001b[33m.\u001b[39mgenerateButton)\u001b[33m.\u001b[39mtoBeDisabled()\u001b[0m"
+                          }
+                        }
+                      ],
+                      "startTime": "2025-06-14T18:54:26.186Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/Users/bartpx/Documents/10xD/test-results/complete-interview-flow-Co-32540-job-posting-character-count-chromium/video.webm"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/Users/bartpx/Documents/10xD/tests/e2e/complete-interview-flow.spec.ts",
+                        "column": 41,
+                        "line": 113
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "77c03b90a8853d1ac806-d9124280dfb8abfcc3cc",
+              "file": "complete-interview-flow.spec.ts",
+              "line": 109,
+              "column": 7
+            },
+            {
+              "title": "should handle multiple practice status changes",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 2,
+                      "status": "failed",
+                      "duration": 37887,
+                      "error": {
+                        "message": "Error: locator.fill: Target page, context or browser has been closed\nCall log:\n\u001b[2m  - waiting for getByRole('textbox', { name: /ogłoszenie o pracę/i })\u001b[22m\n",
+                        "stack": "Error: locator.fill: Target page, context or browser has been closed\nCall log:\n\u001b[2m  - waiting for getByRole('textbox', { name: /ogłoszenie o pracę/i })\u001b[22m\n\n    at HomePage.generateQuestions (/Users/bartpx/Documents/10xD/tests/pages/HomePage.ts:99:35)\n    at /Users/bartpx/Documents/10xD/tests/e2e/complete-interview-flow.spec.ts:140:20",
+                        "location": {
+                          "file": "/Users/bartpx/Documents/10xD/tests/pages/HomePage.ts",
+                          "column": 35,
+                          "line": 99
+                        },
+                        "snippet": "\u001b[90m   at \u001b[39m../pages/HomePage.ts:99\n\n\u001b[0m \u001b[90m  97 |\u001b[39m \u001b[32m    `\u001b[39m\u001b[33m.\u001b[39mtrim()\u001b[33m;\u001b[39m\n \u001b[90m  98 |\u001b[39m     \n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m  99 |\u001b[39m     \u001b[36mawait\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mjobPostingTextarea\u001b[33m.\u001b[39mfill(testJobDescription)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                                   \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 100 |\u001b[39m     \u001b[36mawait\u001b[39m expect(\u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mgenerateButton)\u001b[33m.\u001b[39mtoBeEnabled()\u001b[33m;\u001b[39m\n \u001b[90m 101 |\u001b[39m     \u001b[36mawait\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mgenerateButton\u001b[33m.\u001b[39mclick()\u001b[33m;\u001b[39m\n \u001b[90m 102 |\u001b[39m     \u001b[36mawait\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mpage\u001b[33m.\u001b[39mwaitForLoadState(\u001b[32m'networkidle'\u001b[39m)\u001b[33m;\u001b[39m\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/Users/bartpx/Documents/10xD/tests/pages/HomePage.ts",
+                            "column": 35,
+                            "line": 99
+                          },
+                          "message": "Error: locator.fill: Target page, context or browser has been closed\nCall log:\n\u001b[2m  - waiting for getByRole('textbox', { name: /ogłoszenie o pracę/i })\u001b[22m\n\n\n\u001b[90m   at \u001b[39m../pages/HomePage.ts:99\n\n\u001b[0m \u001b[90m  97 |\u001b[39m \u001b[32m    `\u001b[39m\u001b[33m.\u001b[39mtrim()\u001b[33m;\u001b[39m\n \u001b[90m  98 |\u001b[39m     \n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m  99 |\u001b[39m     \u001b[36mawait\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mjobPostingTextarea\u001b[33m.\u001b[39mfill(testJobDescription)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                                   \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 100 |\u001b[39m     \u001b[36mawait\u001b[39m expect(\u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mgenerateButton)\u001b[33m.\u001b[39mtoBeEnabled()\u001b[33m;\u001b[39m\n \u001b[90m 101 |\u001b[39m     \u001b[36mawait\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mgenerateButton\u001b[33m.\u001b[39mclick()\u001b[33m;\u001b[39m\n \u001b[90m 102 |\u001b[39m     \u001b[36mawait\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mpage\u001b[33m.\u001b[39mwaitForLoadState(\u001b[32m'networkidle'\u001b[39m)\u001b[33m;\u001b[39m\u001b[0m\n\u001b[2m    at HomePage.generateQuestions (/Users/bartpx/Documents/10xD/tests/pages/HomePage.ts:99:35)\u001b[22m\n\u001b[2m    at /Users/bartpx/Documents/10xD/tests/e2e/complete-interview-flow.spec.ts:140:20\u001b[22m"
+                        },
+                        {
+                          "location": {
+                            "file": "/Users/bartpx/Documents/10xD/tests/helpers/api-mocks.ts",
+                            "column": 21,
+                            "line": 137
+                          },
+                          "message": "Error: page.unroute: Target page, context or browser has been closed\n\n\u001b[90m   at \u001b[39m../helpers/api-mocks.ts:137\n\n\u001b[0m \u001b[90m 135 |\u001b[39m \u001b[90m   */\u001b[39m\n \u001b[90m 136 |\u001b[39m   \u001b[36masync\u001b[39m clearAllMocks() {\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 137 |\u001b[39m     \u001b[36mawait\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mpage\u001b[33m.\u001b[39munroute(\u001b[32m'/api/questions/generate'\u001b[39m)\n \u001b[90m     |\u001b[39m                     \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 138 |\u001b[39m     \u001b[36mawait\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mpage\u001b[33m.\u001b[39munroute(\u001b[32m'/api/questions/*'\u001b[39m)\n \u001b[90m 139 |\u001b[39m     \u001b[36mawait\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mpage\u001b[33m.\u001b[39munroute(\u001b[32m'/api/questions'\u001b[39m)\n \u001b[90m 140 |\u001b[39m   }\u001b[0m\n\u001b[2m    at ApiMocks.clearAllMocks (/Users/bartpx/Documents/10xD/tests/helpers/api-mocks.ts:137:21)\u001b[22m\n\u001b[2m    at /Users/bartpx/Documents/10xD/tests/e2e/complete-interview-flow.spec.ts:37:20\u001b[22m"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-06-14T18:54:26.176Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/Users/bartpx/Documents/10xD/test-results/complete-interview-flow-Co-6fe6a-ple-practice-status-changes-chromium/video.webm"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/Users/bartpx/Documents/10xD/tests/pages/HomePage.ts",
+                        "column": 35,
+                        "line": 99
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "77c03b90a8853d1ac806-2810c559926c321e5044",
+              "file": "complete-interview-flow.spec.ts",
+              "line": 138,
+              "column": 7
+            },
+            {
+              "title": "should verify API interactions",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 3,
+                      "parallelIndex": 3,
+                      "status": "failed",
+                      "duration": 8859,
+                      "error": {
+                        "message": "Error: API call to POST /api/questions/generate not detected within 5 seconds",
+                        "stack": "Error: API call to POST /api/questions/generate not detected within 5 seconds\n    at Timeout._onTimeout (/Users/bartpx/Documents/10xD/tests/helpers/api-mocks.ts:168:16)",
+                        "location": {
+                          "file": "/Users/bartpx/Documents/10xD/tests/helpers/api-mocks.ts",
+                          "column": 16,
+                          "line": 168
+                        },
+                        "snippet": "\u001b[90m   at \u001b[39m../helpers/api-mocks.ts:168\n\n\u001b[0m \u001b[90m 166 |\u001b[39m       \u001b[90m// Timeout after 5 seconds\u001b[39m\n \u001b[90m 167 |\u001b[39m       setTimeout(() \u001b[33m=>\u001b[39m {\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 168 |\u001b[39m         reject(\u001b[36mnew\u001b[39m \u001b[33mError\u001b[39m(\u001b[32m`API call to ${method} ${endpoint} not detected within 5 seconds`\u001b[39m))\n \u001b[90m     |\u001b[39m                \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 169 |\u001b[39m       }\u001b[33m,\u001b[39m \u001b[35m5000\u001b[39m)\n \u001b[90m 170 |\u001b[39m     })\n \u001b[90m 171 |\u001b[39m   }\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/Users/bartpx/Documents/10xD/tests/helpers/api-mocks.ts",
+                            "column": 16,
+                            "line": 168
+                          },
+                          "message": "Error: API call to POST /api/questions/generate not detected within 5 seconds\n\n\u001b[90m   at \u001b[39m../helpers/api-mocks.ts:168\n\n\u001b[0m \u001b[90m 166 |\u001b[39m       \u001b[90m// Timeout after 5 seconds\u001b[39m\n \u001b[90m 167 |\u001b[39m       setTimeout(() \u001b[33m=>\u001b[39m {\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 168 |\u001b[39m         reject(\u001b[36mnew\u001b[39m \u001b[33mError\u001b[39m(\u001b[32m`API call to ${method} ${endpoint} not detected within 5 seconds`\u001b[39m))\n \u001b[90m     |\u001b[39m                \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 169 |\u001b[39m       }\u001b[33m,\u001b[39m \u001b[35m5000\u001b[39m)\n \u001b[90m 170 |\u001b[39m     })\n \u001b[90m 171 |\u001b[39m   }\u001b[0m\n\u001b[2m    at Timeout._onTimeout (/Users/bartpx/Documents/10xD/tests/helpers/api-mocks.ts:168:16)\u001b[22m"
+                        },
+                        {
+                          "location": {
+                            "file": "/Users/bartpx/Documents/10xD/tests/pages/HomePage.ts",
+                            "column": 35,
+                            "line": 99
+                          },
+                          "message": "Error: locator.fill: Test ended.\nCall log:\n\u001b[2m  - waiting for getByRole('textbox', { name: /ogłoszenie o pracę/i })\u001b[22m\n\n\n\u001b[90m   at \u001b[39m../pages/HomePage.ts:99\n\n\u001b[0m \u001b[90m  97 |\u001b[39m \u001b[32m    `\u001b[39m\u001b[33m.\u001b[39mtrim()\u001b[33m;\u001b[39m\n \u001b[90m  98 |\u001b[39m     \n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m  99 |\u001b[39m     \u001b[36mawait\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mjobPostingTextarea\u001b[33m.\u001b[39mfill(testJobDescription)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                                   \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 100 |\u001b[39m     \u001b[36mawait\u001b[39m expect(\u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mgenerateButton)\u001b[33m.\u001b[39mtoBeEnabled()\u001b[33m;\u001b[39m\n \u001b[90m 101 |\u001b[39m     \u001b[36mawait\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mgenerateButton\u001b[33m.\u001b[39mclick()\u001b[33m;\u001b[39m\n \u001b[90m 102 |\u001b[39m     \u001b[36mawait\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mpage\u001b[33m.\u001b[39mwaitForLoadState(\u001b[32m'networkidle'\u001b[39m)\u001b[33m;\u001b[39m\u001b[0m\n\u001b[2m    at HomePage.generateQuestions (/Users/bartpx/Documents/10xD/tests/pages/HomePage.ts:99:35)\u001b[22m\n\u001b[2m    at /Users/bartpx/Documents/10xD/tests/e2e/complete-interview-flow.spec.ts:189:22\u001b[22m\n\u001b[2m    at /Users/bartpx/Documents/10xD/tests/e2e/complete-interview-flow.spec.ts:175:16\u001b[22m"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "Verify generate questions API call",
+                          "duration": 5134,
+                          "error": {
+                            "message": "Error: locator.fill: Test ended.\nCall log:\n\u001b[2m  - waiting for getByRole('textbox', { name: /ogłoszenie o pracę/i })\u001b[22m\n",
+                            "stack": "Error: locator.fill: Test ended.\nCall log:\n\u001b[2m  - waiting for getByRole('textbox', { name: /ogłoszenie o pracę/i })\u001b[22m\n\n    at HomePage.generateQuestions (/Users/bartpx/Documents/10xD/tests/pages/HomePage.ts:99:35)\n    at /Users/bartpx/Documents/10xD/tests/e2e/complete-interview-flow.spec.ts:189:22\n    at /Users/bartpx/Documents/10xD/tests/e2e/complete-interview-flow.spec.ts:175:16",
+                            "location": {
+                              "file": "/Users/bartpx/Documents/10xD/tests/pages/HomePage.ts",
+                              "column": 35,
+                              "line": 99
+                            },
+                            "snippet": "\u001b[90m   at \u001b[39m../pages/HomePage.ts:99\n\n\u001b[0m \u001b[90m  97 |\u001b[39m \u001b[32m    `\u001b[39m\u001b[33m.\u001b[39mtrim()\u001b[33m;\u001b[39m\n \u001b[90m  98 |\u001b[39m     \n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m  99 |\u001b[39m     \u001b[36mawait\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mjobPostingTextarea\u001b[33m.\u001b[39mfill(testJobDescription)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                                   \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 100 |\u001b[39m     \u001b[36mawait\u001b[39m expect(\u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mgenerateButton)\u001b[33m.\u001b[39mtoBeEnabled()\u001b[33m;\u001b[39m\n \u001b[90m 101 |\u001b[39m     \u001b[36mawait\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mgenerateButton\u001b[33m.\u001b[39mclick()\u001b[33m;\u001b[39m\n \u001b[90m 102 |\u001b[39m     \u001b[36mawait\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mpage\u001b[33m.\u001b[39mwaitForLoadState(\u001b[32m'networkidle'\u001b[39m)\u001b[33m;\u001b[39m\u001b[0m"
+                          }
+                        }
+                      ],
+                      "startTime": "2025-06-14T18:54:26.179Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/bartpx/Documents/10xD/test-results/complete-interview-flow-Co-2af31-uld-verify-API-interactions-chromium/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/Users/bartpx/Documents/10xD/test-results/complete-interview-flow-Co-2af31-uld-verify-API-interactions-chromium/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/Users/bartpx/Documents/10xD/test-results/complete-interview-flow-Co-2af31-uld-verify-API-interactions-chromium/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/Users/bartpx/Documents/10xD/tests/helpers/api-mocks.ts",
+                        "column": 16,
+                        "line": 168
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "77c03b90a8853d1ac806-f2222bf8cb51db9159c9",
+              "file": "complete-interview-flow.spec.ts",
+              "line": 174,
+              "column": 7
+            },
+            {
+              "title": "should complete workflow within performance thresholds",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 4,
+                      "parallelIndex": 3,
+                      "status": "failed",
+                      "duration": 23848,
+                      "error": {
+                        "message": "Error: locator.fill: Target page, context or browser has been closed\nCall log:\n\u001b[2m  - waiting for getByRole('textbox', { name: /ogłoszenie o pracę/i })\u001b[22m\n\u001b[2m    - waiting for\" https://github.com/login/oauth/authorize?client_id=Ov23liqGaK4x83dRfJ3D&redirect_to=http%3A%2F%2Flocalhost%3A3000%2Fauth%2Fcallback&redirect_uri=http%3A%2F%2F127.0.0.1%3A54321%2Fauth%2Fv1%2Fcallback&…\" navigation to finish...\u001b[22m\n\u001b[2m    - navigated to \"https://github.com/login?client_id=Ov23liqGaK4x83dRfJ3D&return_to=%2Flogin%2Foauth%2Fauthorize%3Fclient_id%3DOv23liqGaK4x83dRfJ3D%26redirect_to%3Dhttp%253A%252F%252Flocalhost%253A3000%252Fauth%252Fca…\"\u001b[22m\n",
+                        "stack": "Error: locator.fill: Target page, context or browser has been closed\nCall log:\n\u001b[2m  - waiting for getByRole('textbox', { name: /ogłoszenie o pracę/i })\u001b[22m\n\u001b[2m    - waiting for\" https://github.com/login/oauth/authorize?client_id=Ov23liqGaK4x83dRfJ3D&redirect_to=http%3A%2F%2Flocalhost%3A3000%2Fauth%2Fcallback&redirect_uri=http%3A%2F%2F127.0.0.1%3A54321%2Fauth%2Fv1%2Fcallback&…\" navigation to finish...\u001b[22m\n\u001b[2m    - navigated to \"https://github.com/login?client_id=Ov23liqGaK4x83dRfJ3D&return_to=%2Flogin%2Foauth%2Fauthorize%3Fclient_id%3DOv23liqGaK4x83dRfJ3D%26redirect_to%3Dhttp%253A%252F%252Flocalhost%253A3000%252Fauth%252Fca…\"\u001b[22m\n\n    at HomePage.generateQuestions (/Users/bartpx/Documents/10xD/tests/pages/HomePage.ts:99:35)\n    at /Users/bartpx/Documents/10xD/tests/e2e/complete-interview-flow.spec.ts:227:22\n    at /Users/bartpx/Documents/10xD/tests/e2e/complete-interview-flow.spec.ts:225:16",
+                        "location": {
+                          "file": "/Users/bartpx/Documents/10xD/tests/pages/HomePage.ts",
+                          "column": 35,
+                          "line": 99
+                        },
+                        "snippet": "\u001b[90m   at \u001b[39m../pages/HomePage.ts:99\n\n\u001b[0m \u001b[90m  97 |\u001b[39m \u001b[32m    `\u001b[39m\u001b[33m.\u001b[39mtrim()\u001b[33m;\u001b[39m\n \u001b[90m  98 |\u001b[39m     \n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m  99 |\u001b[39m     \u001b[36mawait\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mjobPostingTextarea\u001b[33m.\u001b[39mfill(testJobDescription)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                                   \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 100 |\u001b[39m     \u001b[36mawait\u001b[39m expect(\u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mgenerateButton)\u001b[33m.\u001b[39mtoBeEnabled()\u001b[33m;\u001b[39m\n \u001b[90m 101 |\u001b[39m     \u001b[36mawait\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mgenerateButton\u001b[33m.\u001b[39mclick()\u001b[33m;\u001b[39m\n \u001b[90m 102 |\u001b[39m     \u001b[36mawait\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mpage\u001b[33m.\u001b[39mwaitForLoadState(\u001b[32m'networkidle'\u001b[39m)\u001b[33m;\u001b[39m\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/Users/bartpx/Documents/10xD/tests/pages/HomePage.ts",
+                            "column": 35,
+                            "line": 99
+                          },
+                          "message": "Error: locator.fill: Target page, context or browser has been closed\nCall log:\n\u001b[2m  - waiting for getByRole('textbox', { name: /ogłoszenie o pracę/i })\u001b[22m\n\u001b[2m    - waiting for\" https://github.com/login/oauth/authorize?client_id=Ov23liqGaK4x83dRfJ3D&redirect_to=http%3A%2F%2Flocalhost%3A3000%2Fauth%2Fcallback&redirect_uri=http%3A%2F%2F127.0.0.1%3A54321%2Fauth%2Fv1%2Fcallback&…\" navigation to finish...\u001b[22m\n\u001b[2m    - navigated to \"https://github.com/login?client_id=Ov23liqGaK4x83dRfJ3D&return_to=%2Flogin%2Foauth%2Fauthorize%3Fclient_id%3DOv23liqGaK4x83dRfJ3D%26redirect_to%3Dhttp%253A%252F%252Flocalhost%253A3000%252Fauth%252Fca…\"\u001b[22m\n\n\n\u001b[90m   at \u001b[39m../pages/HomePage.ts:99\n\n\u001b[0m \u001b[90m  97 |\u001b[39m \u001b[32m    `\u001b[39m\u001b[33m.\u001b[39mtrim()\u001b[33m;\u001b[39m\n \u001b[90m  98 |\u001b[39m     \n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m  99 |\u001b[39m     \u001b[36mawait\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mjobPostingTextarea\u001b[33m.\u001b[39mfill(testJobDescription)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                                   \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 100 |\u001b[39m     \u001b[36mawait\u001b[39m expect(\u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mgenerateButton)\u001b[33m.\u001b[39mtoBeEnabled()\u001b[33m;\u001b[39m\n \u001b[90m 101 |\u001b[39m     \u001b[36mawait\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mgenerateButton\u001b[33m.\u001b[39mclick()\u001b[33m;\u001b[39m\n \u001b[90m 102 |\u001b[39m     \u001b[36mawait\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mpage\u001b[33m.\u001b[39mwaitForLoadState(\u001b[32m'networkidle'\u001b[39m)\u001b[33m;\u001b[39m\u001b[0m\n\u001b[2m    at HomePage.generateQuestions (/Users/bartpx/Documents/10xD/tests/pages/HomePage.ts:99:35)\u001b[22m\n\u001b[2m    at /Users/bartpx/Documents/10xD/tests/e2e/complete-interview-flow.spec.ts:227:22\u001b[22m\n\u001b[2m    at /Users/bartpx/Documents/10xD/tests/e2e/complete-interview-flow.spec.ts:225:16\u001b[22m"
+                        },
+                        {
+                          "location": {
+                            "file": "/Users/bartpx/Documents/10xD/tests/helpers/api-mocks.ts",
+                            "column": 21,
+                            "line": 137
+                          },
+                          "message": "Error: page.unroute: Target page, context or browser has been closed\n\n\u001b[90m   at \u001b[39m../helpers/api-mocks.ts:137\n\n\u001b[0m \u001b[90m 135 |\u001b[39m \u001b[90m   */\u001b[39m\n \u001b[90m 136 |\u001b[39m   \u001b[36masync\u001b[39m clearAllMocks() {\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 137 |\u001b[39m     \u001b[36mawait\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mpage\u001b[33m.\u001b[39munroute(\u001b[32m'/api/questions/generate'\u001b[39m)\n \u001b[90m     |\u001b[39m                     \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 138 |\u001b[39m     \u001b[36mawait\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mpage\u001b[33m.\u001b[39munroute(\u001b[32m'/api/questions/*'\u001b[39m)\n \u001b[90m 139 |\u001b[39m     \u001b[36mawait\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mpage\u001b[33m.\u001b[39munroute(\u001b[32m'/api/questions'\u001b[39m)\n \u001b[90m 140 |\u001b[39m   }\u001b[0m\n\u001b[2m    at ApiMocks.clearAllMocks (/Users/bartpx/Documents/10xD/tests/helpers/api-mocks.ts:137:21)\u001b[22m\n\u001b[2m    at /Users/bartpx/Documents/10xD/tests/e2e/complete-interview-flow.spec.ts:37:20\u001b[22m"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "Measure complete workflow time",
+                          "duration": 22839,
+                          "error": {
+                            "message": "Error: locator.fill: Target page, context or browser has been closed\nCall log:\n\u001b[2m  - waiting for getByRole('textbox', { name: /ogłoszenie o pracę/i })\u001b[22m\n\u001b[2m    - waiting for\" https://github.com/login/oauth/authorize?client_id=Ov23liqGaK4x83dRfJ3D&redirect_to=http%3A%2F%2Flocalhost%3A3000%2Fauth%2Fcallback&redirect_uri=http%3A%2F%2F127.0.0.1%3A54321%2Fauth%2Fv1%2Fcallback&…\" navigation to finish...\u001b[22m\n\u001b[2m    - navigated to \"https://github.com/login?client_id=Ov23liqGaK4x83dRfJ3D&return_to=%2Flogin%2Foauth%2Fauthorize%3Fclient_id%3DOv23liqGaK4x83dRfJ3D%26redirect_to%3Dhttp%253A%252F%252Flocalhost%253A3000%252Fauth%252Fca…\"\u001b[22m\n",
+                            "stack": "Error: locator.fill: Target page, context or browser has been closed\nCall log:\n\u001b[2m  - waiting for getByRole('textbox', { name: /ogłoszenie o pracę/i })\u001b[22m\n\u001b[2m    - waiting for\" https://github.com/login/oauth/authorize?client_id=Ov23liqGaK4x83dRfJ3D&redirect_to=http%3A%2F%2Flocalhost%3A3000%2Fauth%2Fcallback&redirect_uri=http%3A%2F%2F127.0.0.1%3A54321%2Fauth%2Fv1%2Fcallback&…\" navigation to finish...\u001b[22m\n\u001b[2m    - navigated to \"https://github.com/login?client_id=Ov23liqGaK4x83dRfJ3D&return_to=%2Flogin%2Foauth%2Fauthorize%3Fclient_id%3DOv23liqGaK4x83dRfJ3D%26redirect_to%3Dhttp%253A%252F%252Flocalhost%253A3000%252Fauth%252Fca…\"\u001b[22m\n\n    at HomePage.generateQuestions (/Users/bartpx/Documents/10xD/tests/pages/HomePage.ts:99:35)\n    at /Users/bartpx/Documents/10xD/tests/e2e/complete-interview-flow.spec.ts:227:22\n    at /Users/bartpx/Documents/10xD/tests/e2e/complete-interview-flow.spec.ts:225:16",
+                            "location": {
+                              "file": "/Users/bartpx/Documents/10xD/tests/pages/HomePage.ts",
+                              "column": 35,
+                              "line": 99
+                            },
+                            "snippet": "\u001b[90m   at \u001b[39m../pages/HomePage.ts:99\n\n\u001b[0m \u001b[90m  97 |\u001b[39m \u001b[32m    `\u001b[39m\u001b[33m.\u001b[39mtrim()\u001b[33m;\u001b[39m\n \u001b[90m  98 |\u001b[39m     \n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m  99 |\u001b[39m     \u001b[36mawait\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mjobPostingTextarea\u001b[33m.\u001b[39mfill(testJobDescription)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                                   \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 100 |\u001b[39m     \u001b[36mawait\u001b[39m expect(\u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mgenerateButton)\u001b[33m.\u001b[39mtoBeEnabled()\u001b[33m;\u001b[39m\n \u001b[90m 101 |\u001b[39m     \u001b[36mawait\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mgenerateButton\u001b[33m.\u001b[39mclick()\u001b[33m;\u001b[39m\n \u001b[90m 102 |\u001b[39m     \u001b[36mawait\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mpage\u001b[33m.\u001b[39mwaitForLoadState(\u001b[32m'networkidle'\u001b[39m)\u001b[33m;\u001b[39m\u001b[0m"
+                          }
+                        }
+                      ],
+                      "startTime": "2025-06-14T18:54:37.635Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/Users/bartpx/Documents/10xD/test-results/complete-interview-flow-Co-bbd45-thin-performance-thresholds-chromium/video.webm"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/Users/bartpx/Documents/10xD/tests/pages/HomePage.ts",
+                        "column": 35,
+                        "line": 99
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "77c03b90a8853d1ac806-0d936676b58084b5f602",
+              "file": "complete-interview-flow.spec.ts",
+              "line": 222,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2025-06-14T18:54:24.667Z",
+    "duration": 42568.354,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 5,
+    "flaky": 0
+  }
+}
