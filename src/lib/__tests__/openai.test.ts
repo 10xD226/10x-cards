@@ -1,6 +1,6 @@
 /**
  * Unit tests for OpenAI service
- * Tests question generation functionality with mocked OpenAI API responses
+ * Tests question generation functionality with mocked OpenAI API responses and demo mode
  */
 
 import { jest } from '@jest/globals'
@@ -38,15 +38,159 @@ const mockCreate = jest.fn()
 describe('OpenAI Service', () => {
   beforeEach(() => {
     jest.clearAllMocks()
-    // Set environment variable for tests
-    process.env.OPENAI_API_KEY = 'test-api-key'
-  })
-
-  afterEach(() => {
+    // Clear environment variables
     delete process.env.OPENAI_API_KEY
+    delete process.env.NEXT_PUBLIC_DEMO_MODE
   })
 
-  describe('generateQuestions', () => {
+  describe('Demo Mode', () => {
+    it('should enter demo mode when NEXT_PUBLIC_DEMO_MODE is true', () => {
+      // Arrange
+      process.env.NEXT_PUBLIC_DEMO_MODE = 'true'
+      process.env.OPENAI_API_KEY = 'test-key'
+      
+      // Act
+      const { OpenAIService } = require('../openai')
+      const service = new OpenAIService()
+      
+      // Assert
+      expect(service.isInDemoMode).toBe(true)
+    })
+
+    it('should enter demo mode when OPENAI_API_KEY is not set', () => {
+      // Act
+      const { OpenAIService } = require('../openai')
+      const service = new OpenAIService()
+      
+      // Assert
+      expect(service.isInDemoMode).toBe(true)
+    })
+
+    it('should NOT be in demo mode when API key is set and demo mode is false', () => {
+      // Arrange
+      process.env.OPENAI_API_KEY = 'test-key'
+      process.env.NEXT_PUBLIC_DEMO_MODE = 'false'
+      
+      // Act
+      const { OpenAIService } = require('../openai')
+      const service = new OpenAIService()
+      
+      // Assert
+      expect(service.isInDemoMode).toBe(false)
+    })
+
+    it('should generate mock questions in demo mode for English job posting', async () => {
+      // Arrange
+      process.env.NEXT_PUBLIC_DEMO_MODE = 'true'
+      const { OpenAIService } = require('../openai')
+      const service = new OpenAIService()
+      
+      const englishJobPosting = `
+        Senior Frontend Developer
+        We are looking for a skilled React developer with 3+ years of experience.
+        Requirements: JavaScript, TypeScript, React, Node.js, Git.
+      `.trim()
+
+      // Act
+      const result = await service.generateQuestions(englishJobPosting)
+
+      // Assert
+      expect(result).toHaveLength(5)
+      expect(result.every((q: string) => typeof q === 'string' && q.length >= 20)).toBe(true)
+      // Should contain English mock questions
+      expect(result.some((q: string) => q.includes('experience'))).toBe(true)
+    })
+
+    it('should generate mock questions in demo mode for Polish job posting', async () => {
+      // Arrange
+      process.env.NEXT_PUBLIC_DEMO_MODE = 'true'
+      const { OpenAIService } = require('../openai')
+      const service = new OpenAIService()
+      
+      const polishJobPosting = `
+        Senior Frontend Developer
+        Szukamy doświadczonego programisty React z doświadczeniem 3+ lat.
+        Wymagania: JavaScript, TypeScript, React, Node.js, Git.
+        Praca zdalna, konkurencyjne wynagrodzenie.
+      `.trim()
+
+      // Act
+      const result = await service.generateQuestions(polishJobPosting)
+
+      // Assert
+      expect(result).toHaveLength(5)
+      expect(result.every((q: string) => typeof q === 'string' && q.length >= 20)).toBe(true)
+      // Should contain Polish mock questions
+      expect(result.some((q: string) => q.includes('doświadczeniu') || q.includes('technologiami'))).toBe(true)
+    })
+
+    it('should generate mock questions in demo mode for German job posting', async () => {
+      // Arrange
+      process.env.NEXT_PUBLIC_DEMO_MODE = 'true'
+      const { OpenAIService } = require('../openai')
+      const service = new OpenAIService()
+      
+      const germanJobPosting = `
+        Senior Frontend Entwickler
+        Wir suchen einen erfahrenen React Entwickler mit 3+ Jahren Erfahrung.
+        Anforderungen: JavaScript, TypeScript, React, Node.js, Git.
+        Remote Arbeit, wettbewerbsfähiges Gehalt.
+      `.trim()
+
+      // Act
+      const result = await service.generateQuestions(germanJobPosting)
+
+      // Assert
+      expect(result).toHaveLength(5)
+      expect(result.every((q: string) => typeof q === 'string' && q.length >= 20)).toBe(true)
+      // Should contain German mock questions
+      expect(result.some((q: string) => q.includes('Erfahrung') || q.includes('Technologien'))).toBe(true)
+    })
+
+    it('should simulate realistic delay in demo mode', async () => {
+      // Arrange
+      process.env.NEXT_PUBLIC_DEMO_MODE = 'true'
+      const { OpenAIService } = require('../openai')
+      const service = new OpenAIService()
+      
+      const jobPosting = 'Test job posting'
+      const startTime = Date.now()
+
+      // Act
+      await service.generateQuestions(jobPosting)
+      const endTime = Date.now()
+
+      // Assert
+      const duration = endTime - startTime
+      expect(duration).toBeGreaterThan(1000) // At least 1 second delay
+      expect(duration).toBeLessThan(5000)    // But not too long for tests
+    })
+
+    it('should use simple language detection in demo mode', async () => {
+      // Arrange
+      process.env.NEXT_PUBLIC_DEMO_MODE = 'true'
+      const { OpenAIService } = require('../openai')
+      const service = new OpenAIService()
+
+      // Act
+      const englishLanguage = await service.detectLanguage('Hello world, this is an English text.')
+      const polishLanguage = await service.detectLanguage('Praca w zespole programistów.')
+      const germanLanguage = await service.detectLanguage('Arbeit mit erfahrenen Entwicklern.')
+
+      // Assert
+      expect(englishLanguage).toBe('en')
+      expect(polishLanguage).toBe('pl')
+      expect(germanLanguage).toBe('de')
+    })
+  })
+
+  describe('Production Mode (with API key)', () => {
+    beforeEach(() => {
+      // Set up production mode
+      process.env.OPENAI_API_KEY = 'test-api-key'
+      process.env.NEXT_PUBLIC_DEMO_MODE = 'false'
+    })
+
     const mockJobPosting = `
       Senior Frontend Developer
       We are looking for a skilled React developer with 3+ years of experience.
@@ -55,7 +199,7 @@ describe('OpenAI Service', () => {
       Benefits: Remote work, competitive salary, health insurance.
     `.trim()
 
-    it('should generate exactly 5 questions from job posting', async () => {
+    it('should generate exactly 5 questions from job posting using OpenAI API', async () => {
       // Arrange
       const mockQuestions = [
         'Can you describe your experience with React hooks?',
@@ -75,8 +219,12 @@ describe('OpenAI Service', () => {
         ]
       })
 
+      // Recreate service for production mode
+      delete require.cache[require.resolve('../openai')]
+      const { openaiService: prodService } = require('../openai')
+
       // Act
-      const result = await openaiService.generateQuestions(mockJobPosting)
+      const result = await prodService.generateQuestions(mockJobPosting)
 
       // Assert
       expect(result).toHaveLength(5)
@@ -108,8 +256,12 @@ describe('OpenAI Service', () => {
       const apiError = new (OpenAI as any).APIError('API key invalid', 401)
       mockCreate.mockRejectedValue(apiError)
 
+      // Recreate service for production mode
+      delete require.cache[require.resolve('../openai')]
+      const { openaiService: prodService } = require('../openai')
+
       // Act & Assert
-      await expect(openaiService.generateQuestions(mockJobPosting))
+      await expect(prodService.generateQuestions(mockJobPosting))
         .rejects
         .toThrow('Invalid OpenAI API key')
     })
@@ -119,8 +271,12 @@ describe('OpenAI Service', () => {
       const rateLimitError = new (OpenAI as any).APIError('Rate limit exceeded', 429)
       mockCreate.mockRejectedValue(rateLimitError)
 
+      // Recreate service for production mode
+      delete require.cache[require.resolve('../openai')]
+      const { openaiService: prodService } = require('../openai')
+
       // Act & Assert
-      await expect(openaiService.generateQuestions(mockJobPosting))
+      await expect(prodService.generateQuestions(mockJobPosting))
         .rejects
         .toThrow('OpenAI API rate limit exceeded')
     })
@@ -145,8 +301,12 @@ describe('OpenAI Service', () => {
         ]
       })
 
+      // Recreate service for production mode
+      delete require.cache[require.resolve('../openai')]
+      const { openaiService: prodService } = require('../openai')
+
       // Act & Assert
-      await expect(openaiService.generateQuestions(mockJobPosting))
+      await expect(prodService.generateQuestions(mockJobPosting))
         .rejects
         .toThrow('Generated questions do not meet quality requirements')
     })
@@ -163,8 +323,12 @@ describe('OpenAI Service', () => {
         ]
       })
 
+      // Recreate service for production mode
+      delete require.cache[require.resolve('../openai')]
+      const { openaiService: prodService } = require('../openai')
+
       // Act & Assert
-      await expect(openaiService.generateQuestions(mockJobPosting))
+      await expect(prodService.generateQuestions(mockJobPosting))
         .rejects
         .toThrow('OpenAI returned empty response')
     })
@@ -187,15 +351,17 @@ describe('OpenAI Service', () => {
         ]
       })
 
+      // Recreate service for production mode
+      delete require.cache[require.resolve('../openai')]
+      const { openaiService: prodService } = require('../openai')
+
       // Act & Assert
-      await expect(openaiService.generateQuestions(mockJobPosting))
+      await expect(prodService.generateQuestions(mockJobPosting))
         .rejects
         .toThrow('Generated questions do not meet quality requirements')
     })
-  })
 
-  describe('detectLanguage', () => {
-    it('should detect language correctly', async () => {
+    it('should detect language correctly using OpenAI API', async () => {
       // Arrange
       mockCreate.mockResolvedValue({
         choices: [
@@ -207,8 +373,12 @@ describe('OpenAI Service', () => {
         ]
       })
 
+      // Recreate service for production mode
+      delete require.cache[require.resolve('../openai')]
+      const { openaiService: prodService } = require('../openai')
+
       // Act
-      const result = await openaiService.detectLanguage('Hello world, this is an English text.')
+      const result = await prodService.detectLanguage('Hello world, this is an English text.')
 
       // Assert
       expect(result).toBe('en')
@@ -231,25 +401,15 @@ describe('OpenAI Service', () => {
       // Arrange
       mockCreate.mockRejectedValue(new Error('API failure'))
 
+      // Recreate service for production mode  
+      delete require.cache[require.resolve('../openai')]
+      const { openaiService: prodService } = require('../openai')
+
       // Act
-      const result = await openaiService.detectLanguage('Some text')
+      const result = await prodService.detectLanguage('Some text')
 
       // Assert
       expect(result).toBe('en')
-    })
-  })
-
-  describe('constructor', () => {
-    it('should throw error when API key is missing', () => {
-      // Arrange
-      delete process.env.OPENAI_API_KEY
-
-      // Act & Assert
-      expect(() => {
-        // Create new instance to test constructor
-        const { OpenAIService } = require('../openai')
-        new OpenAIService()
-      }).toThrow('OPENAI_API_KEY environment variable is not set')
     })
   })
 }) 

@@ -1,95 +1,143 @@
 # InterviewPrep AI
 
-## Table of Contents
-1. [Project Description](#project-description)
-2. [Tech Stack](#tech-stack)
-3. [Getting Started Locally](#getting-started-locally)
-4. [Available Scripts](#available-scripts)
-5. [Project Scope](#project-scope)
-6. [Project Status](#project-status)
-7. [Learn More](#learn-more)
-8. [License](#license)
+✨ **AI-powered interview preparation** app that generates personalized, **batched interview questions** powered by OpenAI GPT-3.5-Turbo.
 
-## Project Description
-InterviewPrep AI is a lightweight web application that helps candidates prepare for technical interviews.
-Paste the full text of any job advertisement and the app will instantly generate **five language-matched interview questions** powered by OpenAI GPT-3.5-Turbo.  
-Questions are stored per-user so you can mark them as *practised* or *unpractised* and track your progress over time.
+---
 
-## Tech Stack
-- **Framework:** Next.js 15 (App Router) with TypeScript 5  
-- **Runtime:** Node.js 20  
-- **Styling:** Tailwind CSS 4 + shadcn/ui  
-- **Backend-as-a-Service:** Supabase (PostgreSQL, REST API, GitHub OAuth, Row Level Security)  
-- **AI:** OpenAI GPT-3.5-Turbo via `/api/generate` route  
-- **Auth:** `@supabase/auth-helpers-nextjs` with GitHub provider  
-- **Testing:** Playwright end-to-end tests  
-- **CI/CD:** GitHub Actions → deploy on Vercel  
+## 🌟 Key Features
 
-## Getting Started Locally
+- **GitHub OAuth Authentication** – secure login via GitHub account  
+- **Smart Question Generation** – paste job posting, get 5 tailored questions
+- **Question Practice Tracking** – mark questions as practiced/unpracticed
+- **Multi-language Support** – questions generated in the same language as job posting
+- **Batch Processing** – all questions saved atomically to prevent data loss
+
+## 🛠 Tech Stack
+
+- **Frontend:** Next.js 15 (App Router), React 19, Tailwind CSS
+- **Backend:** Next.js API Routes (Server Actions)
+- **Database:** PostgreSQL (Supabase) with Row Level Security (RLS)
+- **Authentication:** Supabase Auth with GitHub OAuth
+- **AI:** OpenAI GPT-3.5-Turbo via `/api/generate` route
+- **Testing:** Jest (unit), Playwright (e2e)
+- **CI/CD:** GitHub Actions
+
+---
+
+## 🚀 Quick Start
+
 ### Prerequisites
-* Node 20 (managed via `.nvmrc`)
-* GitHub OAuth app configured in Supabase
+
+* Node.js 20+ (check `.nvmrc`)
+* GitHub account (for OAuth)
+* Supabase project
 * OpenAI API key
 
 ### Installation
+
 ```bash
-# 1. Clone the repo
-$ git clone https://github.com/<your_username>/interviewprep.git
-$ cd interviewprep
+# Clone and install dependencies
+git clone <repo_url>
+cd InterviewPrep
+npm ci
 
-# 2. Install dependencies
-$ npm install    # or pnpm install
-
-# 3. Create environment variables
-$ cp .env.example .env.local
+# Copy environment template
 # then fill in SUPABASE_URL, SUPABASE_ANON_KEY and OPENAI_API_KEY
+cp .env.example .env.local
 
-# 4. Run the development server
-$ npm run dev
+# Run database migrations
+npx supabase db reset
+
+# Start development server
+npm run dev
 ```
-Visit `http://localhost:3000` and sign in with GitHub to start generating questions.
 
-## Available Scripts
-| Command | Purpose |
-|---------|---------|
-| `npm run dev` | Start Next.js in development mode with TurboPack |
-| `npm run build` | Create an optimized production build |
-| `npm run start` | Start the built app in production mode |
-| `npm run lint` | Run ESLint code quality checks |
-| `npm run test:e2e` | Execute Playwright end-to-end test |
+## 🧪 Demo Mode (Testing without OpenAI API Key)
 
-## Project Scope
-### In scope (MVP)
-* GitHub OAuth sign-in
-* Text area to paste full job ad
-* Generation of exactly five questions in the same language
-* Persistent storage of questions per user
-* Mark question as **practised / not practised**
-* "My Questions" table filtered by current user
-* Single Playwright e2e test (login → generate → toggle status)
-* CI pipeline (install → test → build) blocking merges on failure
+If you don't have an OpenAI API key yet or want to test the app with mock responses, you can enable **Demo Mode**:
 
-### Out of scope (post-MVP)
-* Answer grading or feedback
-* Importing CV, chat/voice interface, advanced analytics
-* Mobile applications, calendar integrations, WCAG AA compliance
-* Multi-tenant scale (>3 active users)
-* Containerisation (covered by Serverless & BaaS)
+### Option 1: Environment Variable
+```bash
+# In your .env.local file
+NEXT_PUBLIC_DEMO_MODE=true
+```
 
-## Project Status
-🚧 **Work in progress** – core MVP features are being implemented.  
-Planned success metrics:
-1. 100 % green on CI pipeline
-2. ≥ 95 % pass rate for the Playwright test
-3. Average question-generation time < 15 s
+### Option 2: No API Key
+Simply don't set the `OPENAI_API_KEY` environment variable, and the app will automatically switch to demo mode.
 
-Watch the project board for detailed progress and upcoming tasks.
+### What Demo Mode Does:
+- ✅ Uses realistic mock questions in multiple languages (EN, PL, DE)
+- ✅ Simulates API response delay for authentic experience  
+- ✅ Detects job posting language and returns appropriate questions
+- ✅ All other features work normally (auth, database, practice tracking)
+- ⚠️ Shows a console warning: "🚧 OpenAI Service running in DEMO MODE"
 
-## Learn More
+### Example Mock Questions:
+- **English**: "Can you walk me through your experience with the technologies mentioned in this role?"
+- **Polish**: "Opowiedz o swoim doświadczeniu z technologiami wymienionymi w tej ofercie pracy."
+- **German**: "Können Sie Ihre Erfahrung mit den in dieser Stelle erwähnten Technologien beschreiben?"
 
-- [Next.js Documentation](https://nextjs.org/docs) – deep-dive into framework features and API.
-- [Supabase Documentation](https://supabase.com/docs) – database, authentication, and REST API reference.
+**Perfect for:**
+- 🎯 Development and testing
+- 🎯 Demos and presentations  
+- 🎯 Understanding app functionality before getting API keys
+- 🎯 CI/CD pipelines without real API calls
+
+---
+
+## 📝 API Endpoints
+
+### Core Routes:
+- `POST /api/questions/generate` – Generate and save 5 questions from job posting
+- `GET /api/questions` – List user's questions with pagination and filters
+- `PATCH /api/questions/[id]` – Update question practice status
+
+---
+
+## 🧪 Testing
+
+```bash
+# Unit tests (with mocked OpenAI)
+npm run test
+
+# E2E tests (with demo mode)
+npm run test:e2e
+
+# Type checking
+npm run type-check
+
+# Linting
+npm run lint
+```
+
+---
+
+## 📚 Key Documentation
+
+- [Next.js App Router](https://nextjs.org/docs/app) – routing, server components, and API routes
+- [Supabase](https://supabase.com/docs) – database, auth, and real-time subscriptions
 - [OpenAI API Docs](https://platform.openai.com/docs) – model parameters, rate limits, and best practices.
 
-## License
-Distributed under the **MIT License**. See [`LICENSE`](LICENSE) for more information. 
+---
+
+## 🔒 Environment Variables
+
+```bash
+# Supabase Configuration
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url_here
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key_here
+
+# OpenAI Configuration (optional - uses demo mode if not set)
+OPENAI_API_KEY=your_openai_api_key_here
+
+# Demo Mode (optional - defaults to false)
+NEXT_PUBLIC_DEMO_MODE=false
+
+# GitHub OAuth (for production)
+GITHUB_CLIENT_ID=your_github_oauth_app_client_id
+GITHUB_CLIENT_SECRET=your_github_oauth_app_client_secret
+```
+
+---
+
+Built with ❤️ for efficient interview preparation. 
