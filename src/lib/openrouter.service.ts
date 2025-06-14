@@ -57,33 +57,13 @@ const DEFAULT_CONFIG = {
 };
 
 const SYSTEM_PROMPTS = {
-  en: "You are an expert interviewer. Generate 5 interview questions based on the job posting.",
-  pl: "Jesteś ekspertem w przeprowadzaniu rozmów kwalifikacyjnych. Wygeneruj 5 pytań na podstawie ogłoszenia o pracę.",
-  de: "Sie sind ein Experte für Vorstellungsgespräche. Generieren Sie 5 Interviewfragen basierend auf der Stellenausschreibung."
+  en: "You are an expert interviewer. Generate exactly 5 interview questions based on the job posting. Format your response as a numbered list:\n1. [First question]\n2. [Second question]\n3. [Third question]\n4. [Fourth question]\n5. [Fifth question]",
+  pl: "Jesteś ekspertem w przeprowadzaniu rozmów kwalifikacyjnych. Wygeneruj dokładnie 5 pytań na podstawie ogłoszenia o pracę. Sformatuj odpowiedź jako numerowaną listę:\n1. [Pierwsze pytanie]\n2. [Drugie pytanie]\n3. [Trzecie pytanie]\n4. [Czwarte pytanie]\n5. [Piąte pytanie]",
+  de: "Sie sind ein Experte für Vorstellungsgespräche. Generieren Sie genau 5 Interviewfragen basierend auf der Stellenausschreibung. Formatieren Sie Ihre Antwort als nummerierte Liste:\n1. [Erste Frage]\n2. [Zweite Frage]\n3. [Dritte Frage]\n4. [Vierte Frage]\n5. [Fünfte Frage]"
 };
 
 const RESPONSE_FORMAT = {
-  type: 'json_schema',
-  json_schema: {
-    name: 'InterviewQuestions',
-    strict: true,
-    schema: {
-      type: 'object',
-      properties: {
-        questions: {
-          type: 'array',
-          items: {
-            type: 'string',
-            minLength: 20,
-            maxLength: 300
-          },
-          minItems: 5,
-          maxItems: 5
-        }
-      },
-      required: ['questions']
-    }
-  }
+  type: 'json_object'
 };
 
 /**
@@ -111,8 +91,8 @@ export class OpenRouterService {
   private readonly cacheDefaultTTL = 5 * 60 * 1000; // 5 minutes
 
   constructor(config: OpenRouterConfig) {
-    if (!config.apiKey) {
-      console.warn('OpenRouter API key missing, enabling demo mode');
+    if (!config.apiKey || config.apiKey.trim() === '' || config.apiKey === 'demo') {
+      console.warn('🚧 OpenRouter API key missing, enabling demo mode');
       this.isDemoModeEnabled = true;
       this.apiKey = '';
     } else {
@@ -133,8 +113,11 @@ export class OpenRouterService {
    */
   private async makeRequest(endpoint: string, data: any, useCache: boolean = true): Promise<any> {
     if (this.isDemoModeEnabled) {
+      console.log('🚧 OpenRouter: Using demo response for endpoint:', endpoint);
       return this.getDemoResponse(data);
     }
+
+
 
     // Check cache first
     if (useCache) {
@@ -285,14 +268,7 @@ export class OpenRouterService {
     return SYSTEM_PROMPTS[language] || SYSTEM_PROMPTS.en;
   }
 
-  private validateResponse(response: any): void {
-    if (!response || !response.questions || !Array.isArray(response.questions)) {
-      throw new OpenRouterError(
-        'OPENROUTER_INVALID_RESPONSE',
-        'Invalid response format from OpenRouter API'
-      );
-    }
-  }
+
 
   private validateAndTransformResponse(response: any): Question[] {
     const content = response.choices?.[0]?.message?.content;
@@ -303,23 +279,38 @@ export class OpenRouterService {
       );
     }
 
-    let parsedContent;
-    try {
-      parsedContent = JSON.parse(content);
-    } catch (error) {
+    // Parse numbered list from text content
+    const questions = this.parseQuestionsFromText(content);
+    
+    if (!questions || questions.length !== 5) {
       throw new OpenRouterError(
         'OPENROUTER_INVALID_RESPONSE',
-        'Failed to parse JSON response'
+        `Expected 5 questions, got ${questions?.length || 0}`
       );
     }
-
-    this.validateResponse(parsedContent);
     
-    return parsedContent.questions.map((text: string) => ({
-      text,
+    return questions.map((text: string) => ({
+      text: text.trim(),
       category: 'general',
       difficulty: 'medium' as const
     }));
+  }
+
+  private parseQuestionsFromText(content: string): string[] {
+    // Extract questions from numbered list format
+    const lines = content.split('\n');
+    const questions: string[] = [];
+    
+    for (const line of lines) {
+      const trimmed = line.trim();
+      // Match patterns like "1. Question text" or "1) Question text"
+      const match = trimmed.match(/^(\d+)[\.\)]\s*(.+)$/);
+      if (match && match[2]) {
+        questions.push(match[2]);
+      }
+    }
+    
+    return questions;
   }
 
   private sanitizeInput(text: string): string {
@@ -356,7 +347,6 @@ export class OpenRouterService {
           { role: 'system', content: systemPrompt },
           { role: 'user', content: sanitizedJobPosting }
         ],
-        response_format: RESPONSE_FORMAT,
         temperature: 0.7,
         max_tokens: 1000
       });
@@ -385,6 +375,11 @@ export class OpenRouterService {
    * ```
    */
   public async detectLanguage(text: string): Promise<Language> {
+    // In demo mode, use simple keyword-based detection
+    if (this.isDemoModeEnabled) {
+      return this.detectLanguageSimple(text);
+    }
+
     try {
       const sanitizedText = this.sanitizeInput(text.substring(0, 1000)); // Use first 1000 chars for detection
       
@@ -410,9 +405,32 @@ export class OpenRouterService {
       // Fallback to English if detection fails
       return 'en';
     } catch (error) {
-      // Fallback to English on error
-      return 'en';
+      // Fallback to simple detection on error
+      return this.detectLanguageSimple(text);
     }
+  }
+
+  /**
+   * Simple language detection based on keywords
+   * Used in demo mode and as fallback
+   */
+  private detectLanguageSimple(text: string): Language {
+    const lowerText = text.toLowerCase();
+    
+    // Polish detection
+    if (lowerText.includes('praca') || lowerText.includes('stanowisko') || 
+        lowerText.includes('wymagania') || lowerText.includes('doświadczenie')) {
+      return 'pl';
+    }
+    
+    // German detection
+    if (lowerText.includes('stelle') || lowerText.includes('arbeit') || 
+        lowerText.includes('erfahrung') || lowerText.includes('kenntnisse')) {
+      return 'de';
+    }
+    
+    // Default to English
+    return 'en';
   }
 
   /**

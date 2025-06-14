@@ -4,8 +4,9 @@ import type { Database } from '../db/database.types'
 import { questionService } from '../lib/questions'
 import { TopBar } from '../components/dashboard/TopBar'
 import { DashboardClient } from '../components/dashboard/DashboardClient'
+import { LandingPage } from '../components/LandingPage'
 
-export default async function DashboardPage() {
+export default async function HomePage() {
   const cookieStore = cookies()
   const supabase = createServerComponentClient<Database>({
     cookies: () => cookieStore,
@@ -15,15 +16,12 @@ export default async function DashboardPage() {
     data: { session },
   } = await supabase.auth.getSession()
 
-  // If no session, middleware will handle redirect
+  // Show landing page for unauthenticated users
   if (!session?.user) {
-    return (
-      <div className="min-h-screen bg-background flex items-center justify-center">
-        <p>Przekierowywanie do logowania...</p>
-      </div>
-    )
+    return <LandingPage />
   }
 
+  // Show dashboard for authenticated users
   // Pobierz wstępną listę pytań dla użytkownika
   const { questions } = await questionService.listByUser(session.user.id, {
     limit: 50,

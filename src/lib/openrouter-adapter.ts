@@ -11,14 +11,17 @@ class OpenRouterAdapter {
 
   constructor() {
     const apiKey = process.env.OPENROUTER_API_KEY
-    this.isDemoMode = process.env.NEXT_PUBLIC_DEMO_MODE === 'true' || !apiKey
+    // Only use demo mode if explicitly requested AND no API key, or if no API key at all
+    this.isDemoMode = !apiKey || (process.env.NEXT_PUBLIC_DEMO_MODE === 'true' && !apiKey)
     
     if (this.isDemoMode) {
       console.warn('🚧 OpenRouter Service running in DEMO MODE - using mock responses')
+    } else {
+      console.log('✅ OpenRouter Service running in LIVE MODE with API key')
     }
 
     this.openRouterService = new OpenRouterService({
-      apiKey: apiKey || '',
+      apiKey: apiKey || 'demo', // Pass 'demo' instead of empty string to ensure proper demo mode detection
       defaultModel: process.env.OPENROUTER_DEFAULT_MODEL || 'openai/gpt-3.5-turbo',
       maxRetries: 3,
       timeout: 30000

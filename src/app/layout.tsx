@@ -3,6 +3,10 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { QueryProvider } from "../components/providers/QueryProvider";
 import { ToastProvider } from "../components/ui/ToastProvider";
+import { SupabaseProvider } from "../components/providers/SupabaseProvider";
+import { createServerComponentClient } from '@supabase/auth-helpers-nextjs'
+import { cookies } from 'next/headers'
+import type { Database } from '../db/database.types'
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -19,21 +23,32 @@ export const metadata: Metadata = {
   description: "Minimalna aplikacja webowa do przygotowania się do rozmów kwalifikacyjnych. Generuj pytania na podstawie ogłoszeń o pracę.",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const cookieStore = cookies()
+  const supabase = createServerComponentClient<Database>({
+    cookies: () => cookieStore,
+  })
+
+  const {
+    data: { session },
+  } = await supabase.auth.getSession()
+
   return (
-    <html lang="en">
+    <html lang="pl">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <QueryProvider>
-          <ToastProvider>
-            {children}
-          </ToastProvider>
-        </QueryProvider>
+        <SupabaseProvider session={session}>
+          <QueryProvider>
+            <ToastProvider>
+              {children}
+            </ToastProvider>
+          </QueryProvider>
+        </SupabaseProvider>
       </body>
     </html>
   );
