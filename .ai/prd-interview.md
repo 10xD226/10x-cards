@@ -41,4 +41,4 @@ Kandydaci nie wiedzą, jakich pytań oczekiwać na rozmowie kwalifikacyjnej. Rę
 
 1. Pipeline CI przechodzi na zielono przy każdym pushu.
 2. Test e2e przechodzi w ≥ 95 % uruchomień.
-3. Średni czas generowania 5 pytań < 15 s&#x20;
+3. Średni czas generowania 5 pytań < 15 s;
