@@ -2,7 +2,7 @@
 
 ## 1. Przegląd produktu
 
-InterviewPrep to minimalistyczna aplikacja webowa, która w ciągu 10 godzin ma zostać zbudowana przez osobę o ograniczonych umiejętnościach programowania. Umożliwia kandydatom samodzielne generowanie realistycznych pytań rekrutacyjnych na podstawie pełnej treści ogłoszenia o pracę oraz śledzenie postępów w ćwiczeniu odpowiedzi. Projekt zakłada wykorzystanie usług AI (OpenRouter) i gotowych narzędzi developerskich, aby zmaksymalizować szybkość dostarczenia i uprościć utrzymanie.
+InterviewPrep to minimalistyczna aplikacja webowa. Umożliwia kandydatom samodzielne generowanie realistycznych pytań rekrutacyjnych na podstawie pełnej treści ogłoszenia o pracę oraz śledzenie postępów w ćwiczeniu odpowiedzi. Projekt zakłada wykorzystanie usług AI (OpenRouter) i gotowych narzędzi developerskich, aby zmaksymalizować szybkość dostarczenia i uprościć utrzymanie.
 
 ## 2. Problem użytkownika
 
