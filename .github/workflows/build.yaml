@@ -1,4 +1,4 @@
-name: Hello World Workflow
+name: CICD demo Workflow
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
     branches: [ main ]
 
 jobs:
-  hello:
+  it-works:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
