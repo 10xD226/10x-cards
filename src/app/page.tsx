@@ -16,12 +16,13 @@ export default async function HomePage() {
     data: { session },
   } = await supabase.auth.getSession()
 
-  // Show landing page for unauthenticated users
+  // SECURITY: Explicitly show landing page for unauthenticated users
+  // This prevents any unauthorized access to dashboard functionality
   if (!session?.user) {
     return <LandingPage />
   }
 
-  // Show dashboard for authenticated users
+  // Only authenticated users reach this point
   // Pobierz wstępną listę pytań dla użytkownika
   const { questions } = await questionService.listByUser(session.user.id, {
     limit: 50,
