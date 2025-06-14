@@ -1,4 +1,4 @@
-# 🧪 Demo Mode - Test without OpenAI API Key
+# 🧪 Demo Mode - Test without OpenRouter API Key
 
 ## Quick Start
 
@@ -6,11 +6,11 @@
 ```bash
 # In your .env.local file
 NEXT_PUBLIC_DEMO_MODE=true
-# Leave OPENAI_API_KEY empty or don't set it
+# Leave OPENROUTER_API_KEY empty or don't set it
 ```
 
 ### Option 2: Simply Don't Set API Key
-If you don't set `OPENAI_API_KEY`, the app automatically enters demo mode.
+If you don't set `OPENROUTER_API_KEY`, the app automatically enters demo mode.
 
 ## What Demo Mode Provides
 
@@ -18,7 +18,7 @@ If you don't set `OPENAI_API_KEY`, the app automatically enters demo mode.
 ✅ **Simulated API delay** for authentic experience  
 ✅ **Language detection** based on job posting content  
 ✅ **All other features work** (auth, database, practice tracking)  
-⚠️ **Console shows**: "🚧 OpenAI Service running in DEMO MODE"
+⚠️ **Console shows**: "🚧 AI Service running in DEMO MODE"
 
 ## Example Test Flow
 

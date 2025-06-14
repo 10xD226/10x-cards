@@ -1,6 +1,6 @@
 # InterviewPrep AI
 
-✨ **AI-powered interview preparation** app that generates personalized, **batched interview questions** powered by OpenAI GPT-3.5-Turbo.
+✨ **AI-powered interview preparation** app that generates personalized, **batched interview questions** powered by OpenRouter API.
 
 ---
 
@@ -18,7 +18,7 @@
 - **Backend:** Next.js API Routes (Server Actions)
 - **Database:** PostgreSQL (Supabase) with Row Level Security (RLS)
 - **Authentication:** Supabase Auth with GitHub OAuth
-- **AI:** OpenAI GPT-3.5-Turbo via `/api/generate` route
+- **AI:** OpenRouter API via `/api/generate` route
 - **Testing:** Jest (unit), Playwright (e2e)
 - **CI/CD:** GitHub Actions
 
@@ -31,7 +31,7 @@
 * Node.js 20+ (check `.nvmrc`)
 * GitHub account (for OAuth)
 * Supabase project
-* OpenAI API key
+* OpenRouter API key
 
 ### Installation
 
@@ -42,7 +42,7 @@ cd InterviewPrep
 npm ci
 
 # Copy environment template
-# then fill in SUPABASE_URL, SUPABASE_ANON_KEY and OPENAI_API_KEY
+# then fill in SUPABASE_URL, SUPABASE_ANON_KEY and OPENROUTER_API_KEY
 cp .env.example .env.local
 
 # Run database migrations
@@ -52,9 +52,9 @@ npx supabase db reset
 npm run dev
 ```
 
-## 🧪 Demo Mode (Testing without OpenAI API Key)
+## 🧪 Demo Mode (Testing without OpenRouter API Key)
 
-If you don't have an OpenAI API key yet or want to test the app with mock responses, you can enable **Demo Mode**:
+If you don't have an OpenRouter API key yet or want to test the app with mock responses, you can enable **Demo Mode**:
 
 ### Option 1: Environment Variable
 ```bash
@@ -63,14 +63,14 @@ NEXT_PUBLIC_DEMO_MODE=true
 ```
 
 ### Option 2: No API Key
-Simply don't set the `OPENAI_API_KEY` environment variable, and the app will automatically switch to demo mode.
+Simply don't set the `OPENROUTER_API_KEY` environment variable, and the app will automatically switch to demo mode.
 
 ### What Demo Mode Does:
 - ✅ Uses realistic mock questions in multiple languages (EN, PL, DE)
 - ✅ Simulates API response delay for authentic experience  
 - ✅ Detects job posting language and returns appropriate questions
 - ✅ All other features work normally (auth, database, practice tracking)
-- ⚠️ Shows a console warning: "🚧 OpenAI Service running in DEMO MODE"
+- ⚠️ Shows a console warning: "🚧 AI Service running in DEMO MODE"
 
 ### Example Mock Questions:
 - **English**: "Can you walk me through your experience with the technologies mentioned in this role?"
@@ -97,7 +97,7 @@ Simply don't set the `OPENAI_API_KEY` environment variable, and the app will aut
 ## 🧪 Testing
 
 ```bash
-# Unit tests (with mocked OpenAI)
+# Unit tests (with mocked OpenRouter)
 npm run test
 
 # E2E tests (with demo mode)
@@ -116,7 +116,7 @@ npm run lint
 
 - [Next.js App Router](https://nextjs.org/docs/app) – routing, server components, and API routes
 - [Supabase](https://supabase.com/docs) – database, auth, and real-time subscriptions
-- [OpenAI API Docs](https://platform.openai.com/docs) – model parameters, rate limits, and best practices.
+- [OpenRouter API Docs](https://openrouter.ai/docs) – model parameters, rate limits, and best practices.
 
 ---
 
@@ -127,8 +127,8 @@ npm run lint
 NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url_here
 NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key_here
 
-# OpenAI Configuration (optional - uses demo mode if not set)
-OPENAI_API_KEY=your_openai_api_key_here
+# OpenRouter Configuration (optional - uses demo mode if not set)
+OPENROUTER_API_KEY=your_openrouter_api_key_here
 
 # Demo Mode (optional - defaults to false)
 NEXT_PUBLIC_DEMO_MODE=false

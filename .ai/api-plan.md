@@ -11,7 +11,7 @@
 #### Generate and Store Questions
 - **Method**: `POST`
 - **Path**: `/api/questions/generate`
-- **Description**: Generates 5 interview questions from job posting content using OpenAI GPT-3.5-Turbo and stores them in database
+- **Description**: Generates 5 interview questions from job posting content using OpenRouter API and stores them in database
 - **Request Payload**:
 ```json
 {
@@ -39,9 +39,9 @@
 - **Error Codes**:
   - `400 Bad Request`: Invalid job posting length or format
   - `401 Unauthorized`: User not authenticated
-  - `422 Unprocessable Entity`: OpenAI API error or invalid content
+  - `422 Unprocessable Entity`: OpenRouter API error or invalid content
   - `429 Too Many Requests`: Rate limit exceeded
-  - `500 Internal Server Error`: OpenAI API key missing or server error
+  - `500 Internal Server Error`: OpenRouter API key missing or server error
 
 #### List User Questions
 - **Method**: `GET`
@@ -186,7 +186,7 @@
 
 #### Question Generation Logic
 1. **Language Detection**: Automatically detect job posting language
-2. **AI Processing**: Send job posting to OpenAI GPT-3.5-Turbo with structured prompt
+2. **AI Processing**: Send job posting via OpenRouter API with structured prompt
 3. **Content Validation**: Ensure generated questions meet length requirements
 4. **Batch Storage**: Store all 5 questions atomically with positions 1-5
 5. **Error Handling**: Graceful fallback for AI API failures
@@ -198,7 +198,7 @@
 - **Position Uniqueness**: Questions maintain sequential positions 1-5 per generation batch
 
 #### Error Handling Strategies
-- **OpenAI API Failures**: Return user-friendly error messages, don't store incomplete data
+- **OpenRouter API Failures**: Return user-friendly error messages, don't store incomplete data
 - **Rate Limiting**: Implement exponential backoff for API calls
 - **Validation Errors**: Return specific field-level error messages
 - **Database Constraints**: Map constraint violations to meaningful user messages

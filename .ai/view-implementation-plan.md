@@ -1,7 +1,7 @@
 # API Endpoint Implementation Plan: Generate and Store Questions (`POST /api/questions/generate`)
 
 ## 1. Przegląd punktu końcowego
-Ten endpoint przyjmuje pełną treść ogłoszenia o pracę, wykorzystuje model OpenAI GPT-3.5-Turbo do wygenerowania **dokładnie pięciu (5)** realistycznych pytań rekrutacyjnych, a następnie atomowo zapisuje je w tabeli `public.questions` z przypisaniem do zalogowanego użytkownika. Zwraca listę świeżo utworzonych rekordów.
+Ten endpoint przyjmuje pełną treść ogłoszenia o pracę, wykorzystuje OpenRouter API do wygenerowania **dokładnie pięciu (5)** realistycznych pytań rekrutacyjnych, a następnie atomowo zapisuje je w tabeli `public.questions` z przypisaniem do zalogowanego użytkownika. Zwraca listę świeżo utworzonych rekordów.
 
 ## 2. Szczegóły żądania
 * **HTTP Method**: `POST`
@@ -40,7 +40,7 @@ Ten endpoint przyjmuje pełną treść ogłoszenia o pracę, wykorzystuje model 
 ## 5. Przepływ danych
 1. **Autoryzacja** – Route Handler tworzy klienta Supabase po stronie serwera i wyciąga `session.user.id`; brak sesji ⇒ `401`.
 2. **Walidacja Zod** – sprawdza `jobPosting`.
-3. **openaiService.generateQuestions(jobPosting)**
+3. **aiService.generateQuestions(jobPosting)**
    * System-prompt chroniący przed prompt-injection.
    * Żądanie z parametrami model=`gpt-3.5-turbo`, temperatura=0.7.
 4. **Walidacja danych wyjściowych** – musi być tablica 5 stringów `20-300` znaków; w przeciwnym razie `422`.
@@ -62,8 +62,8 @@ Ten endpoint przyjmuje pełną treść ogłoszenia o pracę, wykorzystuje model 
 |------------|-----|------------|
 | Brak autoryzacji | 401 | `{ success:false, message:"Unauthorized" }` |
 | Walidacja `jobPosting` nie przeszła | 400 | Szczegółowy opis pól | 
-| Błąd OpenAI (validation, quota, 4xx) | 422 | Mapujemy `error.message` |
-| Rate limit (np. 429 od OpenAI lub własny) | 429 | "Too Many Requests" |
+| Błąd OpenRouter (validation, quota, 4xx) | 422 | Mapujemy `error.message` |
+| Rate limit (np. 429 od OpenRouter lub własny) | 429 | "Too Many Requests" |
 | Błąd DB / nieoczekiwany | 500 | Log do `errors` + Sentry |
 
 ## 8. Rozważania dotyczące wydajności
@@ -75,7 +75,7 @@ Ten endpoint przyjmuje pełną treść ogłoszenia o pracę, wykorzystuje model 
 ## 9. Etapy wdrożenia
 1. **Definicje typów** (wykonane) – `src/types.ts`.
 2. **Zod schema** – `schemas/question.ts` z `GenerateQuestionsSchema`.
-3. **openaiService** – `lib/openai.ts`; hermetyzuje wywołania i mapowanie odpowiedzi.
+3. **aiService** – `lib/ai.ts`; hermetyzuje wywołania OpenRouter i mapowanie odpowiedzi.
 4. **questionService** – `lib/questions.ts`; funkcja `createBatch` z transakcją Supabase.
 5. **Route Handler** – `app/api/questions/generate/route.ts` (Next.js 15, App Router):
    ```ts
