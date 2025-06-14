@@ -1,3 +1,4 @@
+import { describe, it, expect, beforeEach } from 'vitest'
 import { OpenRouterAdapter, openRouterAdapter } from '../openrouter-adapter'
 
 describe('OpenRouterAdapter', () => {

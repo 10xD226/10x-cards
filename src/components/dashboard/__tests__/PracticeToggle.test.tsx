@@ -1,3 +1,5 @@
+import React from 'react'
+import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { render, screen, fireEvent, waitFor } from '@testing-library/react'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { PracticeToggle } from '../PracticeToggle'
@@ -5,8 +7,8 @@ import { QuestionsProvider } from '../../../contexts/questions-context'
 import { ToastProvider } from '../../ui/ToastProvider'
 import type { QuestionDto } from '../../../types'
 
-// Mock fetch
-global.fetch = jest.fn()
+// Mock fetch using vi.stubGlobal as per test-rules
+vi.stubGlobal('fetch', vi.fn())
 
 const mockQuestions: QuestionDto[] = [
   {
@@ -38,8 +40,10 @@ function TestWrapper({ children }: { children: React.ReactNode }) {
 }
 
 describe('PracticeToggle', () => {
+  const mockFetch = vi.mocked(global.fetch)
+  
   beforeEach(() => {
-    jest.clearAllMocks()
+    vi.clearAllMocks()
   })
 
   it('renders with correct initial state', () => {
@@ -78,10 +82,10 @@ describe('PracticeToggle', () => {
       },
     }
 
-    ;(global.fetch as jest.Mock).mockResolvedValueOnce({
+    mockFetch.mockResolvedValueOnce({
       ok: true,
       json: async () => mockResponse,
-    })
+    } as Response)
 
     render(
       <TestWrapper>
@@ -104,10 +108,10 @@ describe('PracticeToggle', () => {
   })
 
   it('handles API error', async () => {
-    ;(global.fetch as jest.Mock).mockResolvedValueOnce({
+    mockFetch.mockResolvedValueOnce({
       ok: false,
       status: 404,
-    })
+    } as Response)
 
     render(
       <TestWrapper>
@@ -125,11 +129,11 @@ describe('PracticeToggle', () => {
 
   it('disables button during mutation', async () => {
     // Mock a slow response
-    ;(global.fetch as jest.Mock).mockImplementationOnce(
+    mockFetch.mockImplementationOnce(
       () => new Promise(resolve => setTimeout(() => resolve({
         ok: true,
         json: async () => ({ success: true, data: mockQuestions[0] }),
-      }), 100))
+      } as Response), 100))
     )
 
     render(

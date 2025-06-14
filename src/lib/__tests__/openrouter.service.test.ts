@@ -1,3 +1,4 @@
+import { describe, it, expect, beforeEach } from 'vitest'
 import { OpenRouterService, OpenRouterError, type Question, type Language } from '../openrouter.service';
 
 describe('OpenRouterService', () => {

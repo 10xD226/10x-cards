@@ -1,11 +1,13 @@
+import React from 'react'
+import { describe, it, expect, vi } from 'vitest'
 import { render, screen } from '@testing-library/react'
 import { LandingPage } from '../LandingPage'
 
-// Mock Supabase client
-jest.mock('@supabase/auth-helpers-nextjs', () => ({
+// Mock Supabase client using vi.mock factory pattern
+vi.mock('@supabase/auth-helpers-nextjs', () => ({
   createClientComponentClient: () => ({
     auth: {
-      signInWithOAuth: jest.fn().mockResolvedValue({ error: null }),
+      signInWithOAuth: vi.fn().mockResolvedValue({ error: null }),
     },
   }),
 }))

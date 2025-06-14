@@ -1,3 +1,5 @@
+import React from 'react'
+import { describe, it, expect, vi } from 'vitest'
 import { render, screen, act } from '@testing-library/react'
 import { QuestionsProvider, useQuestions } from '../questions-context'
 import type { QuestionDto } from '../../types'
@@ -75,7 +77,7 @@ describe('QuestionsContext', () => {
   })
 
   it('throws error when useQuestions is used outside provider', () => {
-    const consoleSpy = jest.spyOn(console, 'error').mockImplementation(() => {})
+    const consoleSpy = vi.spyOn(console, 'error').mockImplementation(() => {})
 
     expect(() => {
       render(<TestComponent />)
