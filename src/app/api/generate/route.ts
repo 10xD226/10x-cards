@@ -1,44 +1,45 @@
 import { NextRequest, NextResponse } from 'next/server';
-import OpenAI from 'openai';
+import { openRouterAdapter as aiService } from '../../../lib/openrouter-adapter';
 
 export async function POST(req: NextRequest) {
-  const { jobAd } = await req.json();
+  try {
+    const { jobAd } = await req.json();
 
-  if (!process.env.OPENAI_API_KEY) {
+    if (!jobAd || typeof jobAd !== 'string') {
+      return NextResponse.json(
+        { error: 'Invalid job ad content' },
+        { status: 400 }
+      );
+    }
+
+    // Use OpenRouter adapter to generate questions
+    const questions = await aiService.generateQuestions(jobAd);
+
+    return NextResponse.json({ questions });
+    
+  } catch (error) {
+    console.error('Question generation failed:', error);
+    
+    if (error instanceof Error) {
+      // Handle specific errors
+      if (error.message.includes('Invalid OpenRouter API key')) {
+        return NextResponse.json(
+          { error: 'Service temporarily unavailable' },
+          { status: 500 }
+        );
+      }
+      
+      if (error.message.includes('rate limit')) {
+        return NextResponse.json(
+          { error: 'Too many requests. Please try again later.' },
+          { status: 429 }
+        );
+      }
+    }
+    
     return NextResponse.json(
-      { error: 'Missing OPENAI_API_KEY' },
+      { error: 'Failed to generate questions' },
       { status: 500 }
     );
   }
-
-  const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
-  const completion = await openai.chat.completions.create({
-    model: 'gpt-3.5-turbo',
-    messages: [
-      {
-        role: 'system',
-        content:
-          'You are a helpful assistant that generates concise interview questions.'
-      },
-      {
-        role: 'user',
-        content: `Generate exactly 5 interview questions based on this job ad:\n\n${jobAd}`
-      }
-    ],
-    temperature: 0.7
-  });
-
-  const raw = completion.choices[0].message?.content ?? '';
-  const questions = raw
-    .split('\n')
-    .map(q =>
-      q
-        // remove leading numbering like "1.", "2)" or "- "
-        .replace(/^\s*\d+[).\-]?\s*/, '')
-        .trim()
-    )
-    .filter(Boolean)
-    .slice(0, 5);
-
-  return NextResponse.json({ questions });
 }

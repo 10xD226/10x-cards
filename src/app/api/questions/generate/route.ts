@@ -4,7 +4,7 @@ import { cookies } from 'next/headers'
 import { ZodError } from 'zod'
 
 import { GenerateQuestionsSchema } from '../../../../schemas/question'
-import { openaiService } from '../../../../lib/openai'
+import { openRouterAdapter as aiService } from '../../../../lib/openrouter-adapter'
 import { questionService } from '../../../../lib/questions'
 import type { 
   GenerateQuestionsResponseDto, 
@@ -90,18 +90,18 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // 4. Generate questions using OpenAI
+    // 4. Generate questions using OpenRouter
     let generatedQuestions: string[]
     try {
-      generatedQuestions = await openaiService.generateQuestions(
+      generatedQuestions = await aiService.generateQuestions(
         validatedInput.jobPosting
       )
     } catch (error) {
-      console.error('OpenAI generation failed:', error)
+      console.error('OpenRouter generation failed:', error)
       
       if (error instanceof Error) {
-        // Handle specific OpenAI errors
-        if (error.message.includes('Invalid OpenAI API key')) {
+        // Handle specific OpenRouter errors
+        if (error.message.includes('Invalid OpenRouter API key')) {
           return NextResponse.json(
             {
               success: false,
